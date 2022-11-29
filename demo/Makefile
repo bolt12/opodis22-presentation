@@ -1,4 +1,4 @@
-INCLUDES = ../includes
+INCLUDES = ../includes:../includes/iohk-media-kit
 
 all: Demo.pdf
 
