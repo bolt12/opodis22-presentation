@@ -1,8 +1,0 @@
-\let\savesavecolumns\savecolumns
-
-\newcommand{\saverestorecolumns}{%
-\savecolumns\global\let\savecolumns\restorecolumns}
-
-\newcommand{\resetsavecolumns}{%
-\global\let\savecolumns\savesavecolumns}
-
