@@ -1,0 +1,15 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.pdf
+*.ptb
+*.snm
+*.toc
+*.xdv
+*~
+
+# We cannot blindly ignore *.tex
+CodeDemo.tex
