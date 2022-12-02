@@ -1,6 +1,6 @@
-INCLUDES = ../includes
+INCLUDES = ./includes:./includes/iohk-media-kit
 
-all: CodeDemo.pdf
+all: Demo.pdf
 
 %.pdf : %.tex force
 	TEXINPUTS=$(INCLUDES):.: latexmk -pdfxe -interaction=nonstopmode -no-shell-escape $<
@@ -23,3 +23,4 @@ clean :
 force :
 
 .PHONY : force clean
+
