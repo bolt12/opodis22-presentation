@@ -86,12 +86,12 @@
     \begin{column}{0.4\textwidth}
       \footnotesize
       \begin{itemize}
-        \item Highly concurrent
-        \item Reliable and Robust
-        \item Predictable
-        \item Manage resource consumption
-        \item 3000 SPOs
-        \item Has to run 24/7
+        \item Highly concurrent;
+        \item Reliable and Robust;
+        \item Predictable;
+        \item Manage resource consumption;
+        \item 3000 SPOs;
+        \item Has to run 24/7.
       \end{itemize}
 
       \tiny
@@ -112,11 +112,11 @@
   Strongly Statically Typed Purely Functional Programming with \alert{Haskell}!
 
   \begin{itemize}
-      \item Lazyness
-      \item \alert{Type Safeness}
-      \item \alert{Referential Transparency}
-      \item \alert{STM}
-      \item Explicit effects
+      \item Lazyness;
+      \item \alert{Type Safeness};
+      \item \alert{Referential Transparency};
+      \item \alert{STM};
+      \item Explicit effects;
       \item More!
   \end{itemize}
 
@@ -128,11 +128,11 @@
   Internally developed (but open-source) library to specify end-to-end protocols at the type-level!
 
   \begin{itemize}
-    \item Type Safe
-    \item Session Types
-    \item \alert{Deadlock free!}
-    \item Pure
-    \item Powerful (pipelining out of the box)
+    \item Type Safe;
+    \item Session Types;
+    \item \alert{Deadlock free!};
+    \item Pure;
+    \item Powerful (pipelining out of the box).
   \end{itemize}
 
 \end{frame}
@@ -143,10 +143,10 @@
   Property based testing framework for Haskell.
 
   \begin{itemize}
-    \item \alert{Input random generation}
-    \item Shrinking
-    \item \alert{Reproducibility}
-    \item Coverage checks
+    \item \alert{Input random generation};
+    \item Shrinking;
+    \item \alert{Reproducibility};
+    \item Coverage checks.
   \end{itemize}
 
 \end{frame}
@@ -159,8 +159,8 @@
   Simulations}, in particular:
 
   \begin{itemize}
-    \item write \alert{network simulations}, to verify a complex networking stack
-    \item write \alert{disk IO simulations}, to verify a database implementation
+    \item write \alert{network simulations}, to verify a complex networking stack;
+    \item write \alert{disk IO simulations}, to verify a database implementation.
   \end{itemize}
 \end{frame}
 
@@ -169,16 +169,16 @@
   \begin{columns}
     \begin{column}{0.4\textwidth}
       \begin{itemize}
-        \item Early detection of critical races
-        \item Simulation of rare \alert{edge cases}
-        \item Mocking and \alert{error injection}
-        \item Simulate time passing
-        \item Looking for \alert{different schedules}
+        \item Early detection of critical races;
+        \item Simulation of rare \alert{edge cases};
+        \item Mocking and \alert{error injection};
+        \item Simulate time passing;
+        \item Looking for \alert{different schedules}.
       \end{itemize}
       Most importantly:
       \begin{itemize}
         \item Allows for testing \alert{production code} and
-        \item \alert{Reproducing} complex edge-case test failures
+        \item \alert{Reproducing} complex edge-case test failures.
       \end{itemize}
     
     \end{column}
@@ -191,15 +191,14 @@
 
 \section{Conclusion}
 
-\begin{frame}{Progress?}
-  Complex systems spans performance characteristics we can not control.
-
-  We do our best in searching through all state space efficiently.
-
-  Functional Programming, namely Haskell and its concurrency tools helped us manage
-  complexity.
-
-  Code reviewing is very efficient!
+\begin{frame}{Best effort}
+  \begin{itemize}
+    \item Complex systems spans performance characteristics we can not control;
+    \item Functional Programming, namely Haskell and its concurrency tools helped us manage complexity;
+    \item We do our best in searching through all state space efficiently;
+    \item Code reviewing is efficient;
+    \item Progress is achievable.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Far from perfect}
@@ -207,26 +206,25 @@
   We have had quite a few bugs, and we still do!
 
   \begin{itemize}
-    \item \alert{378 closed bug issues} related with networking
-    \item \alert{276 open ones}
-    \item \alert{10\%} of the issues are related with simulation environment
-    \item About a handful of them were due to missplaced logging events
+    \item \alert{378 closed bug issues} related with networking;
+    \item \alert{276 open ones};
+    \item \alert{10\%} of the issues are related with simulation environment;
+    \item About a handful of them were due to missplaced logging events.
   \end{itemize}
 
-  Our CI runs on average beetween $1$ and $5$ hours of simulated time per test per
-  PR per OS. Which means:
+  Our CI runs on average beetween $1$ and $5$ hours of simulated time per test per input per PR per OS. Which means:
 
   \begin{itemize}
-    \item Assuming around 100 tests in our test suite
-    \item Assuming 3 PRs per day
-    \item Testing on Windows, OSX and Linux
-    \item Results on 11 250 hours of simulation per week. \pause
-    \item All with a \st{20 member} \alert{5 member team}!
+    \item Assuming around 100 tests in our test suite and
+    \item each test generates 100 random inputs;
+    \item Assuming 3 PRs per week;
+    \item Testing on Windows, OSX and Linux;
+    \item Results on around 225 000 hours of simulated time per week!
   \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Hall of Fame}
+\begin{frame}{Some examples of bugs found}
 
   \begin{itemize}
     \item
