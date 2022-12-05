@@ -7,7 +7,7 @@
 
 \begin{document}
 
-\title{How to build a Distributed System with Real-time Constraints}
+\title{Building a Distributed System with Real-time Constraints}
 \subtitle{Using concurrent Functional Programming tools}
 \author{Armando Santos}
 \date{\today}
@@ -23,10 +23,6 @@
   \vfill
   \end{frame}
 }
-
-\begin{frame}{Table of Contents}
-  \tableofcontents
-\end{frame}
 
 \section{Introduction}
 \subsection*{Networking Team}
@@ -67,7 +63,7 @@
   \multicolumn{1}{c}{\alert{\textbf{Refining step}}} &
   \multicolumn{1}{c}{\alert{\textbf{Implementation}}} &
   \multicolumn{1}{c}{\alert{\textbf{Testing}}} \\ \\
-\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Formal Specification\\ \\  Threat models\\ \\  Non-realistic assumptions\end{tabular}} &
+\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Formal Specification\\ \\  Threat models\\ \\  Non-realistic assumptions\\ \\  Performance objectives\end{tabular}} &
   \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Real time constraints\\ \\  Concurrency\\ \\  Operation \& Performance\end{tabular}} &
   \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Architecture \& Design\\ \\  Protocols\\ \\  Scale\\ \\  Exceptions \& Corner cases\end{tabular}} &
   \begin{tabular}[c]{@{}l@{}}Properties\\ \\  Simulation\\ \\  Reliability\\ \\  CI\end{tabular}
@@ -90,7 +86,7 @@
         \item Reliable and Robust;
         \item Predictable;
         \item Manage resource consumption;
-        \item 3000 SPOs;
+        \item Thousands of SPOs;
         \item Has to run 24/7.
       \end{itemize}
 
@@ -112,7 +108,7 @@
   Strongly Statically Typed Purely Functional Programming with \alert{Haskell}!
 
   \begin{itemize}
-      \item Lazyness;
+      \item Non-strict evaluation;
       \item \alert{Type Safeness};
       \item \alert{Referential Transparency};
       \item \alert{STM};
@@ -130,7 +126,7 @@
   \begin{itemize}
     \item Type Safe;
     \item Session Types;
-    \item \alert{Deadlock free!};
+    \item \alert{Deadlock free!}
     \item Pure;
     \item Powerful (pipelining out of the box).
   \end{itemize}
@@ -153,7 +149,8 @@
 
 \subsection*{IO Simulator}
 \begin{frame}{IO Simulator}
-  Simulation monad that is a drop-in \alert{replacement} for IO!
+  Simulation monad that is a drop-in \alert{replacement} for IO (and other execution
+  kernel primitives in Haskell)!
 
   Internally developed (but open source) library to perform all kinds of \alert{IO
   Simulations}, in particular:
@@ -164,8 +161,8 @@
   \end{itemize}
 \end{frame}
 
-\subsubsection*{IO Simulator allows...}
-\begin{frame}{IO Simulator allows...}
+\subsubsection*{We're using IO Simulator for...}
+\begin{frame}{We're using IO Simulator for...}
   \begin{columns}
     \begin{column}{0.4\textwidth}
       \begin{itemize}
@@ -177,7 +174,7 @@
       \end{itemize}
       Most importantly:
       \begin{itemize}
-        \item Allows for testing \alert{production code} and
+        \item Performing tests using \alert{same codebase} and
         \item \alert{Reproducing} complex edge-case test failures.
       \end{itemize}
     
@@ -196,23 +193,23 @@
     \item Complex systems spans performance characteristics we can not control;
     \item Functional Programming, namely Haskell and its concurrency tools helped us manage complexity;
     \item We do our best in searching through all state space efficiently;
-    \item Code reviewing is efficient;
+    \item Well-founded confidence;
     \item Progress is achievable.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Far from perfect}
 
-  We have had quite a few bugs, and we still do!
+  We have had quite a few issues, and we still do!
 
   \begin{itemize}
-    \item \alert{378 closed bug issues} related with networking;
-    \item \alert{276 open ones};
+    \item \alert{378 closed issues} related with networking;
+    \item \alert{276 open ones} (minor, good-to-have issues);
     \item \alert{10\%} of the issues are related with simulation environment;
-    \item About a handful of them were due to missplaced logging events.
+    \item About a handful of them were due to misplaced logging events.
   \end{itemize}
 
-  Our CI runs on average beetween $1$ and $5$ hours of simulated time per test per input per PR per OS. Which means:
+  Our CI test suite runs on average between $1$ and $5$ hours of simulated time per test per input per PR per OS. Which means:
 
   \begin{itemize}
     \item Assuming around 100 tests in our test suite and
@@ -225,6 +222,8 @@
 \end{frame}
 
 \begin{frame}{Some examples of bugs found}
+
+  Discovering rare events in the real world:
 
   \begin{itemize}
     \item
