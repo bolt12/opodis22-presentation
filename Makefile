@@ -18,7 +18,7 @@ all: Demo.pdf
 	ghcid -c "ghci -pgmL lhs2TeX -optL-P$(INCLUDES): -optL--pre" $<
 
 clean :
-	rm -f *.aux *.log *.nav *.out *.ptb *.snm *.toc *.xdv *.fls *.fdb_latexmk
+	rm -f *.aux *.log *.nav *.out *.ptb *.snm *.toc *.xdv *.fls *.fdb_latexmk *.pdf
 
 force :
 

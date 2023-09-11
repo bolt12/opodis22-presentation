@@ -1,8 +1,14 @@
 \documentclass{beamer}
 
+\setbeamertemplate{frametitle}[default][center] % Centering the frame title
 \usetheme[iohk]{welltyped}
 \usepackage{graphicx}
 \usepackage{soul}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{wrapfig}
+\usepackage{caption}
 \graphicspath{ {../includes/} }
 
 \begin{document}
@@ -49,200 +55,195 @@
   \end{columns}
 \end{frame}
 
-\section{What we are doing}
+\section{What we are responsible for at the networking team}
 
 \subsection*{Cardano Node}
 \begin{frame}{Cardano Node}
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-\begin{table}[]
-\centering
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{llll}
-  \multicolumn{1}{c}{\alert{\textbf{Ouroboros algorithm paper}}} &
-  \multicolumn{1}{c}{\alert{\textbf{Refining step}}} &
-  \multicolumn{1}{c}{\alert{\textbf{Implementation}}} &
-  \multicolumn{1}{c}{\alert{\textbf{Testing}}} \\ \\
-\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Formal Specification\\ \\  Threat models\\ \\  Non-realistic assumptions\\ \\  Performance objectives\end{tabular}} &
-  \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Real time constraints\\ \\  Concurrency\\ \\  Operation \& Performance\end{tabular}} &
-  \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Architecture \& Design\\ \\  Protocols\\ \\  Scale\\ \\  Exceptions \& Corner cases\end{tabular}} &
-  \begin{tabular}[c]{@{}l@{}}Properties\\ \\  Simulation\\ \\  Reliability\\ \\  CI\end{tabular}
-\end{tabular}%
-}
-\end{table}
+  \centering
+
+  \begin{figure}[h]
+    \includegraphics[width=0.3\textwidth, height=0.2\textheight]{cardano.png}
+  \end{figure}
+
+  \vskip-0.5cm
+
+  \begin{table}[]
+    \centering
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{llll}
+        \multicolumn{1}{c}{\alert{\textbf{Ouroboros algorithm paper}}} &
+        \multicolumn{1}{c}{\alert{\textbf{Refining step}}} &
+        \multicolumn{1}{c}{\alert{\textbf{Implementation}}} &
+        \multicolumn{1}{c}{\alert{\textbf{Testing}}} \\ \\
+        \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Formal Specification\\ \\  Threat models\\ \\  Non-realistic assumptions\\ \\  Performance objectives\end{tabular}} &
+        \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Real time constraints\\ \\  Concurrency\\ \\  Operation \& Performance\end{tabular}} &
+        \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Architecture \& Design\\ \\  Protocols\\ \\  Scale\\ \\  Exceptions \& Corner cases\end{tabular}} &
+        \begin{tabular}[c]{@{}l@{}}Properties\\ \\  Simulation\\ \\  Reliability\\ \\  CI\end{tabular}
+      \end{tabular}%
+    }
+  \end{table}
 \end{frame}
 
-\subsection*{Decentralised Network}
-\begin{frame}{Decentralised Network }
-  \begin{columns}
-    \begin{column}{0.6\textwidth}
-      \vskip0.2cm
-      \includegraphics[height=0.9\textheight, width=\textwidth]{ConnectionManagerInteractions.pdf}
-    \end{column}
-    \begin{column}{0.4\textwidth}
-      \footnotesize
-      \begin{itemize}
-        \item Highly concurrent;
-        \item Reliable and Robust;
-        \item Predictable;
-        \item Manage resource consumption;
-        \item Thousands of SPOs;
-        \item Has to run 24/7.
-      \end{itemize}
+\section{Presentation overview}
 
-      \tiny
-      \begin{block}{More details}
-        To read more about this, check out our documentation at:
-        \href{https://github.com/input-output-hk/ouroboros-network/}{https://github.com/input-output-hk/ouroboros-network/}
-      \end{block}
+\section{The Challenge: Real-time Distributed System}
 
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\section{How we are doing it}
-
-\subsection*{Functional Programming}
-
-\begin{frame}{Functional Programming}
-  Strongly Statically Typed Purely Functional Programming with \alert{Haskell}!
-
+\begin{frame}{Cardano's Vision of a Distributed System}
   \begin{itemize}
-      \item Non-strict evaluation;
-      \item \alert{Type Safeness};
-      \item \alert{Referential Transparency};
-      \item \alert{STM};
-      \item Explicit effects;
-      \item More!
+    \item It's a distributed system, but
+    \begin{itemize}
+      \item Latency
+      \item Scalability
+      \item Fault Tolerance
+      \item Honest stake assumption
+      \item Real-time constraints
+      \item Adversarial behavior
+    \end{itemize}
   \end{itemize}
 
 \end{frame}
 
-\subsection*{Typed Protocols}
+\section{Constraints, Assumptions, and Implementation Challenges in Cardano}
 
-\begin{frame}{Typed Protocols}
-  Internally developed (but open-source) library to specify end-to-end protocols at the type-level!
-
-  \begin{itemize}
-    \item Type Safe;
-    \item Session Types;
-    \item \alert{Deadlock free!}
-    \item Pure;
-    \item Powerful (pipelining out of the box).
-  \end{itemize}
-
+\begin{frame}{Faithfulness to Research vs. Real-World Implementation}
+  \begin{figure}[h]
+      \centering
+      \begin{minipage}{0.45\textwidth}
+          \centering
+          \includegraphics[width=0.9\linewidth]{paper.png} % Adjust the width as necessary
+          \caption{Ouroboros paper}
+      \end{minipage}\hfill
+      \begin{minipage}{0.45\textwidth}
+          \centering
+          \includegraphics[width=0.9\linewidth]{code2.png} % Adjust the width as necessary
+          \caption{Code base}
+      \end{minipage}
+  \end{figure}
 \end{frame}
 
-\subsection*{QuickCheck}
-
-\begin{frame}{QuickCheck}
-  Property based testing framework for Haskell.
-
+\begin{frame}{Need to fill the gap}
   \begin{itemize}
-    \item \alert{Input random generation};
-    \item Shrinking;
-    \item \alert{Reproducibility};
-    \item Coverage checks.
-  \end{itemize}
-
-\end{frame}
-
-\subsection*{IO Simulator}
-\begin{frame}{IO Simulator}
-  Simulation monad that is a drop-in \alert{replacement} for IO (and other execution
-  kernel primitives in Haskell)!
-
-  Internally developed (but open source) library to perform all kinds of \alert{IO
-  Simulations}, in particular:
-
-  \begin{itemize}
-    \item write \alert{network simulations}, to verify a complex networking stack;
-    \item write \alert{disk IO simulations}, to verify a database implementation.
+    \item Translate formal specification into code
+    \item Highly concurrent logic
+    \item High assurance needs (i.e. as verifiable and robust as possible)
+    \item Clear code structures, predictable behavior
   \end{itemize}
 \end{frame}
 
-\subsubsection*{We're using IO Simulator for...}
-\begin{frame}{We're using IO Simulator for...}
-  \begin{columns}
-    \begin{column}{0.4\textwidth}
-      \begin{itemize}
-        \item Early detection of critical races;
-        \item Simulation of rare \alert{edge cases};
-        \item Mocking and \alert{error injection};
-        \item Simulate time passing;
-        \item Looking for \alert{different schedules}.
-      \end{itemize}
-      Most importantly:
-      \begin{itemize}
-        \item Performing tests using \alert{same codebase} and
-        \item \alert{Reproducing} complex edge-case test failures.
-      \end{itemize}
-    
-    \end{column}
-    \begin{column}{0.6\textwidth}
-        %Content
-      \includegraphics[scale=1.2, width=\textwidth]{code.png}
-    \end{column}
-  \end{columns}
-\end{frame}
+\section{Strongly Statically Typed Purely Functional Programming}
 
-\section{Conclusion}
+\begin{frame}{Haskell}
+  \begin{figure}
+    \centering
+    \includegraphics[height=0.55\textheight]{10reasonsWhy.png}
+    \caption{\href{https://imgur.com/i0wTFSO.png}{Source}}
+  \end{figure}
 
-\begin{frame}{Best effort}
+  But:
   \begin{itemize}
-    \item Complex systems spans performance characteristics we can not control;
-    \item Functional Programming, namely Haskell and its concurrency tools helped us manage complexity;
-    \item We do our best in searching through all state space efficiently;
-    \item Well-founded confidence;
-    \item Progress is achievable.
+    \item Memory consumption
+    \item Debugging can be tricky
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Far from perfect}
+\begin{frame}{In a nutshell}
+  \begin{figure}
+    \centering
+    \includegraphics[height=0.8\textheight]{whyfp.png}
+    \caption{\href{https://imgur.com/EeMZL0I.png}{Source}}
+  \end{figure}
+\end{frame}
 
-  We have had quite a few issues, and we still do!
+\section{Tools \& Techniques}
 
+\begin{frame}{Software Transactional Memory (STM)}
   \begin{itemize}
-    \item \alert{378 closed issues} related with networking;
-    \item \alert{276 open ones} (minor, good-to-have issues);
-    \item \alert{10\%} of the issues are related with simulation environment;
-    \item About a handful of them were due to misplaced logging events.
+    \item Compositional and modular concurrency
+    \item Isolated from IO side effects
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Abstraction \& Libraries}
+  \begin{minipage}{0.6\textwidth} % Adjust the width as needed
+    \begin{itemize}
+      \item First to finish vs Last to finish STM semantics
+      \item Typed-protocols
+         \begin{itemize}
+           \item Type safe
+           \item Session types
+           \item \alert{Deadlock free!}
+         \end{itemize}
+    \end{itemize}
+  \end{minipage}%
+  \begin{minipage}{0.4\textwidth} % Adjust the width as needed
+    \begin{figure}[h]
+      \includegraphics[width=0.85\linewidth]{abstraction.png} % Replace with the path to your image
+    \end{figure}
+    \begin{figure}[h]
+      \includegraphics[width=0.85\linewidth]{peerSharing.png} % Replace with the path to your image
+    \end{figure}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}{Testing approach}
+  \begin{itemize}
+    \item Property based testing vs unit tests
+       \begin{itemize}
+         \item \alert{Input random generation};
+         \item Shrinking;
+         \item \alert{Reproducibility};
+         \item Coverage checks.
+       \end{itemize}
+    \item Simulation
+       \begin{itemize}
+         \item Early detection of critical races;
+         \item Simulation of rare \alert{edge cases};
+         \item Mocking and \alert{error injection};
+         \item Simulate time passing;
+         \item Looking for \alert{different schedules}.
+       \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Highlights from the Networking Team}
+
+\begin{frame}{Highlights}
+
+  Good:
+  \begin{itemize}
+    \item Found several tricky edge case bugs
+    \item Network is running for years non-stop
+    \item Simulate years of total time per week!
   \end{itemize}
 
-  Our CI test suite runs on average between $1$ and $5$ hours of simulated time per test per input per PR per OS. Which means:
+  But:
+  \begin{itemize}
+    \item We are far from perfect, we still fix and find small bugs every month related to networking
+  \end{itemize}
+
+  We try our best:
+
+  Our CI test suite runs on average between $1$ and $5$ hours of simulated time per test
+  per input per PR per OS. So:
 
   \begin{itemize}
     \item Assuming around 100 tests in our test suite and
     \item each test generates 100 random inputs;
-    \item Assuming 3 PRs per week;
-    \item Testing on Windows, OSX and Linux;
-    \item Results on around 225 000 hours of simulated time per week!
+    \item Assuming 3 PRs per week and testing on Windows, OSX and Linux;
+    \item Results on around \emph{225 000 hours} of simulated time per week!
   \end{itemize}
-
 \end{frame}
 
-\begin{frame}{Some examples of bugs found}
+\section{Takeaways}
 
-  Discovering rare events in the real world:
-
+\begin{frame}{Takeaways}
   \begin{itemize}
-    \item
-      \href{https://github.com/input-output-hk/ouroboros-network/pull/3640/commits/f21334b7630c939a1ef35e452d10956cbf39e3fd}{Different
-      scheduling found a edge case where state was being blindly overwritten}
-    \vskip0.4cm
-    \item
-      \href{https://github.com/input-output-hk/ouroboros-network/issues/3572}{Asynchronous
-      exceptions on a blocking \texttt{finally} block}
-    \vskip0.4cm
-    \item
-      \href{https://github.com/input-output-hk/ouroboros-network/issues/3553}{Timeouts not
-      being enforced withing reasonable bounds}
-    \vskip0.4cm
-    \item
-      \href{https://github.com/input-output-hk/ouroboros-network/issues/3344}{Pruning
-      connections misbehavior in the presence of a TCP Simultaneous Open}
+    \item Complex systems spans performance characteristics we can not control;
+    \item Functional Programming, namely Haskell and its concurrency tools helps us manage complexity;
+    \item We do our best in searching through all state space efficiently;
+    \item Well-founded confidence;
+    \item Progress is achievable.
   \end{itemize}
-
 \end{frame}
 
 \begin{frame}
@@ -250,7 +251,6 @@
   \usebeamerfont{title}
   Thank you!
 \end{frame}
-
 
 \end{document}
 
